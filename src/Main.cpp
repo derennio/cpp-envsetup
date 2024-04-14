@@ -1,13 +1,78 @@
 #include <iostream>
 #include <json/json.h>
+#include <getopt.h>
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
+const char * const HELPTXT = {
+    "Usage: options [OPTIONS] file ...\n" \
+    "-h, --help             Display this information\n" \
+    "    --debug            Enable debug mode\n" \
+    "-o <file>              Named output of these programm\n" \
+    "-v, --version          Display Programm Information\n" \
+    "\n" \
+    "For more information contact team@us.de"
+};
 
-    // Use jsoncpp
-    Json::Value root;
-    root["key"] = "value";
-    std::cout << root << std::endl;
+static int debug = {0};
+
+const struct option longopts[] =
+{
+    { "debug", no_argument, &debug, 1 },
+    { "help", no_argument, NULL, 'h' },
+    { "version", no_argument, NULL, 'v' },
+    { 0, 0, 0, 0 }
+};
+
+static void printHelp()
+{
+    puts(HELPTXT);
+    exit(0);
+}
+
+static void printVersion()
+{
+    puts("Version vom " __DATE__);
+    exit(0);
+}
+
+void processArguments(int argc, char **argv)
+{
+    int optindex = {0};
+    int c = {0};
+
+    if (argc < 2) {
+        printHelp();
+        return;
+    }
+
+    while((c = getopt_long(argc, argv, "ho:v", longopts, &optindex)) >= 0)
+    {
+        switch(c)
+        {
+        case 0:
+            printHelp();
+            break;
+        case 'h':
+            printHelp();
+            break;
+        case 'v':
+            printVersion();
+            break;
+        default:
+            printHelp();
+            break;
+        }
+    }
+
+    if (optind < argc) {
+        printf("Nonoption arguments ");
+        while (optind < argc)
+            printf("%s ", argv[optind++]);
+        printf("\n");
+    }
+}
+
+int main(int argc, char **argv) {
+    processArguments(argc, argv);
 
     return 0;
 }
