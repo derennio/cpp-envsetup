@@ -1,3 +1,0 @@
-/home/ennio/Uni/cpp-envsetup/build/CMakeFiles/EnvSetup.dir
-/home/ennio/Uni/cpp-envsetup/build/CMakeFiles/edit_cache.dir
-/home/ennio/Uni/cpp-envsetup/build/CMakeFiles/rebuild_cache.dir

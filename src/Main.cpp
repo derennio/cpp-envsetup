@@ -72,6 +72,17 @@ void processArguments(int argc, char **argv)
 }
 
 int main(int argc, char **argv) {
+    Json::Value root;
+    Json::Reader reader;
+    std::string json = "{\"array\":[\"item1\",\"item2\"],\"not an array\":\"asdf\"}";
+    bool parsingSuccessful = reader.parse(json, root);
+    if (!parsingSuccessful) {
+        std::cout << "Failed to parse JSON" << std::endl;
+        return 1;
+    }
+
+    std::cout << root << std::endl;
+
     processArguments(argc, argv);
 
     return 0;
