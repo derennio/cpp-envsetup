@@ -7,8 +7,8 @@ project(EnvSetup)
 # Current C++ standard, since 23 is not yet supported
 set(CMAKE_CXX_STANDARD 20)
 
-    include_directories(${PROJECT_SOURCE_DIR}/include) 
-    link_directories(${PROJECT_SOURCE_DIR}/lib) 
+include_directories(${PROJECT_SOURCE_DIR}/include) 
+link_directories(${PROJECT_SOURCE_DIR}/lib) 
 
 # Find the jsoncpp library
 #find_package(jsoncpp REQUIRED)
