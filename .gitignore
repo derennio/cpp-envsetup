@@ -28,3 +28,6 @@
 # CMakefiles and CMakeCache
 CMakeFiles
 CMakeCache.txt
+
+# Real fast build script
+build/*.sh

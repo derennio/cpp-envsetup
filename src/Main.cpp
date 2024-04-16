@@ -2,13 +2,18 @@
 #include <json/json.h>
 #include <getopt.h>
 
+#include "file/FileParser.hpp"
+#include "json/EnvConfigJson.hpp"
+#include "json/JsonParser.hpp"
+
 const char * const HELPTXT = {
-    "Usage: options [OPTIONS] file ...\n" \
+    "Usage: EnvSetup [OPTIONS] file [file2] ...\n" \
     "-h, --help             Display this information\n" \
     "    --debug            Enable debug mode\n" \
     "-o <file>              Named output of these programm\n" \
     "-v, --version          Display Programm Information\n" \
     "\n" \
+    "EnvSetup is a tool written by Maria Birrenbach, Arne Sponer, Niklas Roth and Ennio Haibach\n" \
     "For more information contact team@us.de"
 };
 
@@ -34,6 +39,26 @@ static void printVersion()
     exit(0);
 }
 
+void processFiles(const std::vector<std::string> files)
+{
+    for(auto file : files) {
+        if (debug) {
+            std::cout << "Now parsing file: " << file << std::endl;
+        }
+
+        Json::Value jsonObject = FileParser::parseJsonFile(file);
+        EnvConfig envConfig = JsonParser::parseJson(jsonObject);
+
+            std::cout << "Output file: " << envConfig.outputFile << std::endl;
+            std::cout << "Hide shell: " << envConfig.hideShell << std::endl;
+            for(auto entry : envConfig.entries) {
+                std::cout << "Entry type: " << entry.type << std::endl;
+                std::cout << "Entry key: " << entry.key << std::endl;
+                std::cout << "Entry value: " << entry.value << std::endl;
+            }
+    }
+}
+
 void processArguments(int argc, char **argv)
 {
     int optindex = {0};
@@ -48,41 +73,32 @@ void processArguments(int argc, char **argv)
     {
         switch(c)
         {
-        case 0:
-            printHelp();
-            break;
-        case 'h':
-            printHelp();
-            break;
-        case 'v':
-            printVersion();
-            break;
-        default:
-            printHelp();
-            break;
+            case 0:
+                printHelp();
+                break;
+            case 'h':
+                printHelp();
+                break;
+            case 'v':
+                printVersion();
+                break;
+            default:
+                printHelp();
+                break;
         }
     }
 
-    if (optind < argc) {
-        printf("Nonoption arguments ");
-        while (optind < argc)
-            printf("%s ", argv[optind++]);
-        printf("\n");
+    std::vector<std::string> remainingArgs;
+    for(int index = optind; index < argc; index++) {
+        remainingArgs.push_back(argv[index]);
+    }
+
+    if (remainingArgs.size() > 0) {
+        processFiles(remainingArgs);
     }
 }
 
 int main(int argc, char **argv) {
-    Json::Value root;
-    Json::Reader reader;
-    std::string json = "{\"array\":[\"item1\",\"item2\"],\"not an array\":\"asdf\"}";
-    bool parsingSuccessful = reader.parse(json, root);
-    if (!parsingSuccessful) {
-        std::cout << "Failed to parse JSON" << std::endl;
-        return 1;
-    }
-
-    std::cout << root << std::endl;
-
     processArguments(argc, argv);
 
     return 0;
