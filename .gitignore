@@ -30,4 +30,4 @@ CMakeFiles
 CMakeCache.txt
 
 # Real fast build script
-build/*.sh
+build/
