@@ -2,7 +2,7 @@
 #define JSON_PARSER_HPP
 
 #include <string>
-#include "../file/FileParser.hpp"
+#include "../file/FileUtils.hpp"
 #include "EnvConfigJson.hpp"
 
 class JsonParser {
@@ -12,14 +12,14 @@ public:
         EnvConfig envConfig;
 
         // Parse the output file
-        if (jsonValue.isMember("outputFile")) {
-            envConfig.outputFile = jsonValue["outputFile"].asString();
+        if (jsonValue.isMember("outputfile")) {
+            envConfig.outputFile = jsonValue["outputfile"].asString();
         } else {
             envConfig.outputFile = "output.bat";
         }
 
         // Parse the hideShell flag
-        if (jsonValue.isMember("hideShell")) {
+        if (jsonValue.isMember("hideshell")) {
             envConfig.hideShell = jsonValue["hideShell"].asBool();
         } else {
             envConfig.hideShell = false;

@@ -1,12 +1,12 @@
-#ifndef FILEPARSER_H
-#define FILEPARSER_H
+#ifndef FILEUTILS_HPP
+#define FILEUTILS_HPP
 
 #include <string>
 #include <fstream>
 #include <json/json.h>
 #include <filesystem>
 
-class FileParser {
+class FileUtils {
 public:
     static Json::Value parseJsonFile(const std::string& filename) {
         std::ifstream file(filename);
@@ -30,6 +30,19 @@ public:
 
         return jsonObject;
     }
+
+    static void generateBatchFile(const std::string& fileName, const std::string& content) {
+        std::ofstream file(fileName);
+
+        if (!file.is_open()) {
+            throw std::runtime_error("Failed to create file: " + fileName);
+        }
+
+        file << ":: Automatically generated batch file. DO NOT EDIT!" << std::endl;
+        file << content;
+
+        file.close();
+    }
 };
 
-#endif // FILEPARSER_HPP
+#endif // FILEUTILS_HPP

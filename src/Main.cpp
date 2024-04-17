@@ -2,9 +2,10 @@
 #include <json/json.h>
 #include <getopt.h>
 
-#include "file/FileParser.hpp"
+#include "file/FileUtils.hpp"
 #include "json/EnvConfigJson.hpp"
 #include "json/JsonParser.hpp"
+#include "batch/BatchConverter.hpp"
 
 const char * const HELPTXT = {
     "Usage: EnvSetup [OPTIONS] file [file2] ...\n" \
@@ -46,16 +47,18 @@ void processFiles(const std::vector<std::string> files)
             std::cout << "Now parsing file: " << file << std::endl;
         }
 
-        Json::Value jsonObject = FileParser::parseJsonFile(file);
+        Json::Value jsonObject = FileUtils::parseJsonFile(file);
         EnvConfig envConfig = JsonParser::parseJson(jsonObject);
 
-            std::cout << "Output file: " << envConfig.outputFile << std::endl;
-            std::cout << "Hide shell: " << envConfig.hideShell << std::endl;
-            for(auto entry : envConfig.entries) {
-                std::cout << "Entry type: " << entry.type << std::endl;
-                std::cout << "Entry key: " << entry.key << std::endl;
-                std::cout << "Entry value: " << entry.value << std::endl;
-            }
+        std::cout << "Output file: " << envConfig.outputFile << std::endl;
+        std::cout << "Hide shell: " << envConfig.hideShell << std::endl;
+        for(auto entry : envConfig.entries) {
+            std::cout << "Entry type: " << entry.type << std::endl;
+            std::cout << "Entry key: " << entry.key << std::endl;
+            std::cout << "Entry value: " << entry.value << std::endl;
+        }
+
+        BatchConverter::convertToBatchScript(envConfig);
     }
 }
 
