@@ -8,10 +8,11 @@ project(EnvSetup)
 set(CMAKE_CXX_STANDARD 20)
 
 include_directories(${PROJECT_SOURCE_DIR}/include) 
-link_directories(${PROJECT_SOURCE_DIR}/lib) 
-
-# Find the jsoncpp library
-#find_package(jsoncpp REQUIRED)
+if(APPLE)
+    link_directories(${PROJECT_SOURCE_DIR}/lib/mac) 
+else()
+    link_directories(${PROJECT_SOURCE_DIR}/lib) 
+endif()
 
 # Add executable
 add_executable(${PROJECT_NAME} src/Main.cpp)
