@@ -80,6 +80,18 @@ public:
             }
         }
 
+        // Parse the application
+        if (jsonValue.isMember("application")) {
+            envConfig.application = jsonValue["application"].asString();
+        } 
+
+        // Check if the JSON contains other members
+        for (const auto& member : jsonValue.getMemberNames()) {
+            if (member != "application" && member != "entries" && member != "outputfile" && member != "hideshell") {
+                throw std::runtime_error("Invalid member in JSON at position " + std::to_string(jsonValue.get(member, Json::Value()).getOffsetStart()) + ": " + member);
+            }
+        }
+
         // Return the parsed EnvConfig object
         return envConfig;
     }

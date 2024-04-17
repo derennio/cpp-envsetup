@@ -21,6 +21,7 @@ struct EnvConfig {
     std::string outputFile;
     bool hideShell;
     std::vector<Entry> entries;
+    std::string application;
 };
 
 #endif // ENVCONFIGJSON_HPP
