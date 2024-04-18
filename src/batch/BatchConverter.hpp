@@ -23,7 +23,7 @@ public:
         }
         else
         {
-            content += "@echo off\n\n";
+            content += "@echo off\r\n\r\n";
         }
 
         // Select environment variable set calls from json
