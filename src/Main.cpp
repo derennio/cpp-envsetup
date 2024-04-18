@@ -1,4 +1,4 @@
-#define __VERSION__ "0.1"
+#define __E_VERSION__ "0.1"
 
 #include <iostream>
 #include <json/json.h>
@@ -13,8 +13,7 @@ const char * const HELPTXT = {
     "Usage: EnvSetup [OPTIONS] file [file2] ...\n" \
     "-h, --help             Display this information\n" \
     "    --debug            Enable debug mode\n" \
-    "-o <file>              Named output of these programm\n" \
-    "-v, --version          Display Programm Information\n" \
+    "-v, --version          Display current version number\n" \
     "\n" \
     "EnvSetup is a tool written by Maria Birrenbach, Arne Sponer, Niklas Roth and Ennio Haibach\n" \
     "For more information contact haibach.ennio-it23@it.dhbw-ravensburg.de, sponer.arne-it23@it.dhbw-ravensburg.de, roth.niklas-it23@it.dhbw-ravensburg.de or birrenbach.maria-it23@it.dhbw-ravensburg.de"
@@ -38,7 +37,7 @@ static void printHelp()
 
 static void printVersion()
 {
-    puts("Current version number " __VERSION__);
+    puts("Current version number " __E_VERSION__);
 }
 
 void processFiles(const std::vector<std::string> files)
