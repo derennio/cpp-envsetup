@@ -18,5 +18,4 @@ endif()
 add_executable(${PROJECT_NAME} src/Main.cpp)
 
 # Link the jsoncpp library
-#target_link_libraries(${PROJECT_NAME} jsoncpp_lib)
 target_link_libraries(${PROJECT_NAME} jsoncpp)
