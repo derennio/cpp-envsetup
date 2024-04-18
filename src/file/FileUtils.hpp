@@ -45,7 +45,7 @@ public:
             throw std::runtime_error("Failed to create file: " + fileName);
         }
 
-        file << ":: Automatically generated batch file. DO NOT EDIT!" << std::endl;
+        file << ":: Automatically generated batch file. DO NOT EDIT!\r\n";
         file << content;
 
         file.close();

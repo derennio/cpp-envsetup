@@ -14,12 +14,12 @@ public:
 
         content += "start cmd ";
         content += config.hideShell ? "/c" : "/k";
-        content += "\n";
+        content += "\r\n";
 
         // May as well disable output for when the console stays hidden.
         if (config.hideShell)
         {
-            content += "@echo off\n\n";
+            content += "@echo off\r\n\r\n";
         }
         else
         {
@@ -41,7 +41,7 @@ public:
             }
             else
             {
-                setExtension += envEntries[i].key + "=" + envEntries[i].value + "\n";
+                setExtension += envEntries[i].key + "=" + envEntries[i].value + "\r\n";
             }
         }
 
@@ -54,7 +54,7 @@ public:
         {
             if (variable.type == EntryType::EXE)
             {
-                content += variable.value + "\n";
+                content += variable.value + "\r\n";
             }
             else if (variable.type == EntryType::PATH)
             {
@@ -64,12 +64,12 @@ public:
 
         if (!pathExtension.empty())
         {
-            content += "set PATH=%PATH%;" + pathExtension + "\n";
+            content += "set PATH=%PATH%;" + pathExtension + "\r\n";
         }
 
         if (!config.application.empty())
         {
-            content += "start \"" + config.application + "\"\n";
+            content += "start \"" + config.application + "\"\r\n";
         }
 
         // Add file creation and content writing
