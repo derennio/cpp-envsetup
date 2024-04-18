@@ -1,3 +1,5 @@
+#define __VERSION__ "0.1"
+
 #include <iostream>
 #include <json/json.h>
 #include <getopt.h>
@@ -15,7 +17,7 @@ const char * const HELPTXT = {
     "-v, --version          Display Programm Information\n" \
     "\n" \
     "EnvSetup is a tool written by Maria Birrenbach, Arne Sponer, Niklas Roth and Ennio Haibach\n" \
-    "For more information contact ennio.haibach@gmail.com, sponer.arne-it23@it.dhbw-ravensburg.de, roth.niklas-it23@it.dhbw-ravensburg.de or birrenbach.maria-it23@it.dhbw-ravensburg.de"
+    "For more information contact haibach.ennio-it23@it.dhbw-ravensburg.de, sponer.arne-it23@it.dhbw-ravensburg.de, roth.niklas-it23@it.dhbw-ravensburg.de or birrenbach.maria-it23@it.dhbw-ravensburg.de"
 };
 
 static int debug = {0};
@@ -36,8 +38,7 @@ static void printHelp()
 
 static void printVersion()
 {
-    puts("Version vom " __DATE__);
-    exit(0);
+    puts("Current version number " __VERSION__);
 }
 
 void processFiles(const std::vector<std::string> files)
@@ -57,6 +58,7 @@ void processFiles(const std::vector<std::string> files)
             std::cout << "Entry key: " << entry.key << std::endl;
             std::cout << "Entry value: " << entry.value << std::endl;
         }
+        std::cout << "Application: " << envConfig.application << std::endl;
 
         BatchConverter::convertToBatchScript(envConfig);
     }
