@@ -15,7 +15,7 @@ const char * const HELPTXT = {
     "-v, --version          Display Programm Information\n" \
     "\n" \
     "EnvSetup is a tool written by Maria Birrenbach, Arne Sponer, Niklas Roth and Ennio Haibach\n" \
-    "For more information contact team@us.de"
+    "For more information contact ennio.haibach@gmail.com, sponer.arne-it23@it.dhbw-ravensburg.de, roth.niklas-it23@it.dhbw-ravensburg.de or birrenbach.maria-it23@it.dhbw-ravensburg.de"
 };
 
 static int debug = {0};

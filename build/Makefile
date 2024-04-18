@@ -57,10 +57,10 @@ RM = /opt/homebrew/Cellar/cmake/3.29.2/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/mariabirrenbach/Documents/Uni/Programmieren/C++/cpp-envsetup
+CMAKE_SOURCE_DIR = "/Users/arnesponer/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Studium/DHBW/Dokumente/Semester 1/Programmieren/C_C++/Prüfungsaufgabe/cpp-envsetup"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/mariabirrenbach/Documents/Uni/Programmieren/C++/cpp-envsetup/build
+CMAKE_BINARY_DIR = "/Users/arnesponer/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Studium/DHBW/Dokumente/Semester 1/Programmieren/C_C++/Prüfungsaufgabe/cpp-envsetup/build"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mariabirrenbach/Documents/Uni/Programmieren/C++/cpp-envsetup/build/CMakeFiles /Users/mariabirrenbach/Documents/Uni/Programmieren/C++/cpp-envsetup/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/arnesponer/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Studium/DHBW/Dokumente/Semester 1/Programmieren/C_C++/Prüfungsaufgabe/cpp-envsetup/build/CMakeFiles" "/Users/arnesponer/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Studium/DHBW/Dokumente/Semester 1/Programmieren/C_C++/Prüfungsaufgabe/cpp-envsetup/build//CMakeFiles/progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mariabirrenbach/Documents/Uni/Programmieren/C++/cpp-envsetup/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/arnesponer/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Studium/DHBW/Dokumente/Semester 1/Programmieren/C_C++/Prüfungsaufgabe/cpp-envsetup/build/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
