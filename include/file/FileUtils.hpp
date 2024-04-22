@@ -11,12 +11,27 @@ class FileUtils
 public:
     static Json::Value parseJsonFile(const std::string &filename)
     {
-        std::ifstream file(filename);
+        bool isLink = filename.find("http://") == 0 || filename.find("https://") == 0;
 
         if (!std::filesystem::exists(filename))
         {
-            throw std::runtime_error("File does not exist: " + filename);
+            if(isLink)
+            {
+                std::string command = "curl -o downloaded_file.json " + filename;
+                int status = std::system(command.c_str());
+
+                if (status != 0) {
+                    std::cerr << "Failed to download file from " << filename << std::endl;
+                    return 1;
+                }
+            }
+            else
+            {
+                throw std::runtime_error("File does not exist: " + filename);
+            }
         }
+
+        std::ifstream file(isLink ? "downloaded_file.json" : filename);
 
         if (!file.is_open())
         {
