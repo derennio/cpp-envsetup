@@ -12,10 +12,6 @@ public:
     {
         std::string content;
 
-        content += "start cmd ";
-        content += config.hideShell ? "/c" : "/k";
-        content += "\r\n";
-
         // May as well disable output for when the console stays hidden.
         if (config.hideShell)
         {
@@ -23,8 +19,11 @@ public:
         }
         else
         {
-            content += "@echo off\r\n\r\n";
+            content += "@echo on\r\n\r\n";
         }
+
+        content += "C:\\Windows\\System32\\cmd.exe ";
+        content += config.hideShell ? "/c \"" : "/k \"";
 
         // Select environment variable set calls from json
         std::vector<Entry> envEntries;
@@ -33,7 +32,7 @@ public:
                      { return entry.type == EntryType::ENV; });
 
         // Build one combined set string
-        for (int i = 0; i < envEntries.size(); i++)
+        for (u_int32_t i = 0; i < envEntries.size(); i++)
         {
             if (i != envEntries.size() - 1)
             {
@@ -41,7 +40,7 @@ public:
             }
             else
             {
-                setExtension += envEntries[i].key + "=" + envEntries[i].value + "\r\n";
+                setExtension += envEntries[i].key + "=" + envEntries[i].value + ((envEntries.size() < config.entries.size()) ? " && " : "\r\n");
             }
         }
 
@@ -54,7 +53,7 @@ public:
         {
             if (variable.type == EntryType::EXE)
             {
-                content += variable.value + "\r\n";
+                content += variable.value + " && ";
             }
             else if (variable.type == EntryType::PATH)
             {
@@ -62,15 +61,21 @@ public:
             }
         }
 
+        if (pathExtension.empty() && config.application.empty()) {
+            content += ";";
+        }
+
         if (!pathExtension.empty())
         {
-            content += "set PATH=%PATH%;" + pathExtension + "\r\n";
+            content += "set PATH=%PATH%;" + pathExtension + (!config.application.empty() ? " && " : "\"\r\n");
         }
 
         if (!config.application.empty())
         {
-            content += "start \"" + config.application + "\"\r\n";
+            content += "start " + config.application + "\"\r\n";
         }
+
+        content += "@echo on\r\n";
 
         // Add file creation and content writing
         FileUtils::generateBatchFile(config.outputFile, content);

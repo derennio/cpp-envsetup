@@ -20,7 +20,7 @@ public:
 
         // Parse the hideShell flag
         if (jsonValue.isMember("hideshell")) {
-            envConfig.hideShell = jsonValue["hideShell"].asBool();
+            envConfig.hideShell = jsonValue["hideshell"].asBool();
         } else {
             envConfig.hideShell = false;
         }

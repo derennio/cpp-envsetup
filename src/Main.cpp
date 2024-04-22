@@ -12,18 +12,14 @@
 const char * const HELPTXT = {
     "Usage: EnvSetup [OPTIONS] file [file2] ...\n" \
     "-h, --help             Display this information\n" \
-    "    --debug            Enable debug mode\n" \
     "-v, --version          Display current version number\n" \
     "\n" \
     "EnvSetup is a tool written by Maria Birrenbach, Arne Sponer, Niklas Roth and Ennio Haibach\n" \
     "For more information contact haibach.ennio-it23@it.dhbw-ravensburg.de, sponer.arne-it23@it.dhbw-ravensburg.de, roth.niklas-it23@it.dhbw-ravensburg.de or birrenbach.maria-it23@it.dhbw-ravensburg.de"
 };
 
-static int debug = {0};
-
 const struct option longopts[] =
 {
-    { "debug", no_argument, &debug, 1 },
     { "help", no_argument, NULL, 'h' },
     { "version", no_argument, NULL, 'v' },
     { 0, 0, 0, 0 }
@@ -43,9 +39,7 @@ static void printVersion()
 void processFiles(const std::vector<std::string> files)
 {
     for(auto file : files) {
-        if (debug) {
-            std::cout << "Now parsing file: " << file << std::endl;
-        }
+        std::cout << "Now parsing file: " << file << std::endl;
 
         Json::Value jsonObject = FileUtils::parseJsonFile(file);
         EnvConfig envConfig = JsonParser::parseJson(jsonObject);

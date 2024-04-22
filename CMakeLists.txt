@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Project's name
-project(EnvSetup)
+project(EnvSetup CXX)
 
 # Current C++ standard, since 23 is not yet supported
 set(CMAKE_CXX_STANDARD 20)
